@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="shortcut icon" href="/img/logocom.png" type="imag/x-icon" >
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cabecalho.css">
+    <link rel="stylesheet" href="css/base.css">
+    
+    <title>Contato</title>
+</head>
+
+
+<header>
+
+    <!-- CABEÇALHO -->
+    <div class="cabecalho" >
+        <div class="logo">
+            <img src="./img/logo.png" alt="comidinha pet"/>
+        </div>
+
+        <div class="redes-sociais">
+            <ul>
+                <li> <a href="https://www.reddit.com/"><img src="./img/rss.png" /></a></li>
+                <li><a href="https://www.facebook.com/comidinhapetsaudavel"> <img src="./img/face.png" /></a></li>
+                <li><a href="https://www.instagram.com/comidinha.pet/"><img src="./img/logoinsta.png"/></a></li>
+                <li><a href="https://www.linkedin.com/"> <img src="./img/linkedin.png" /></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="nav">
+        <ul>
+            <li><a href="../html/menu.html">Integrantes</a></li>
+                    <li><a href="../html/servicos.html">Serviços</a></li>
+                    <li> <a href="../clima.php">Clima API</a></li>
+                    <li> <a href="../html/contato.html">Contato</a></li>
+        </ul>    
+    </header>
+
+<body>
+
+    <div class="content-cont">
+        <form method="post" action="" enctype="multipart/form-data">
+        <h1 class="titulo">Contato</h1>
+            
+            <div class="form-group">
+                <label class="label-control">Nome</label>
+                <input type="text" name="nome" id="nome" placeholder="Insira seu nome" class="input-control">
+            </div>
+            
+             <div class="form-group">
+                <label class="label-control">E-mail</label>
+                <input type="email" name="email" id="email" placeholder="Insira seu e-mail" class="input-control">
+            </div>
+            
+             <div class="form-group">
+                <label class="label-control">Fone</label>
+                <input type="fone" name="fone" id="fone" placeholder="Insira seu fone" class="input-control">
+            </div>
+            
+             <div class="form-group">
+                <label class="label-control">Sobre</label>
+                <textarea rows="5" cols="50" name="sobre" id="sobre"
+                            placeholder="Coloque a sua duvida ou sugestão aqui" class="text-control"></textarea>
+            </div>
+            
+            <div class="form-group">
+                <input type="submit" name="enviar" value="Enviar" class="btn-control">
+            </div>
+        </form>
+
+        <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3719.4809479788028!2d-50.442815785064234!3d-21.21276878589905!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94964191e409a733%3A0xd1d66ebb503540cb!2sComidinha%20Pet!5e0!3m2!1spt-BR!2sbr!4v1654012727118!5m2!1spt-BR!2sbr" width="100%" height="500" style="border:1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+        <footer>
+            <p class="copyright">&copy;Copyright Comidinhas Pet - 2022</p>
+        </footer>
+</body>
+</html>

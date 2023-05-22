@@ -1,0 +1,40 @@
+<html>
+<head> 
+<meta charset="UTF-8">
+<link rel="stylesheet" href="html/css/login.css">
+<link rel="shortcut icon" href="../html/img/logocom.png" type="imag/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../html/css/reset.css">
+    <link rel="stylesheet" href="../html/css/style.css">
+    <link rel="stylesheet" href="../html/css/cabecalho.css">
+    <link rel="stylesheet" href="../html/css/slider.css">
+<link rel="stylesheet" href="../html/css/base.css">
+<title>Login</title>
+</head>
+<body>  
+    <div class="content-cont">
+
+        <center>
+            <h1 class="titulo">Login</h1>
+
+            <h1 class="titulo">🐱COMIDINHA PET🐶</h1>
+            <div class="form-group">
+            <form action="src/login.php" method="post">
+              <input name="cpf" type="number" placeholder="Digite o cpf:" 
+              class="input-control"><br>
+              <input name="senha"  type="password" placeholder="Digite a senha:" 
+              class="input-control"><br><br>
+              <input name="token" type="hidden"  value="meutoken">
+        
+              <input class="btn-control" name="botaoEnviar" type="submit"  
+              value="Enviar">
+            </div>
+            </form>
+            <br>
+            <a href="html/cadUsuario.html">Não tem cadastro ainda? Clique aqui.</a><br><br>
+            <div class="mensagem"> <!--mensagem--> </div>
+        </center>
+        
+    </div>
+</body>
+</html>

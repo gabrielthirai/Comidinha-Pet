@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin: 10%;
+    background-image: url(../img/backlogin.jpg);
+    background-size: cover;
+}
+
+.content-cont{
+    margin: 0 auto;
+    width: 100%;
+    
+  }
+  form{
+    font: 1rem Open Sans;
+    display: block;
+  }
+  .titulo{
+  
+    font: 3rem Open Sans, Times, sans-serif;
+    font-weight: bold;
+    color:rgb(222, 84, 25);
+    text-align: center;
+    margin: 15px 0;
+   
+}
+
+.form-group{
+  margin: 5px auto;
+  padding: 5px;
+  width: 400px;
+  
+}
+
+.label-control{
+  font-weight: bold;
+  display: block;
+  text-transform: capitalize;
+}
+
+.input-control, text-control{
+  border: 1px solid #000000;
+  border-radius: 30px;
+  padding: 10px 5px;
+  margin: 5px 0;
+  width: 100%;
+  box-shadow: 3px 3px #CCC;
+  font: 1rem Open Sans;
+
+}
+
+.text-control{
+  color: blue;
+  font: 1rem Open Sans;
+}
+
+.btn-control{
+  border: 1px solid #000;
+  background: rgb(222, 84, 25);
+  color: #FFF;
+  font-weight: bold;
+  font: 1rem Open Sans;
+  font-size: 1rem;
+  padding: 10px 5px;
+  border-radius: 15px;
+  cursor: pointer;
+  width: 100px;
+  
+}
+
+.btn-control:hover{
+  background: linear-gradient(135deg, #F00, rgb(172, 42, 42));
+  color: #000;
+  transition: 0.5s;
+}
