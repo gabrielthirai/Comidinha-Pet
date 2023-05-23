@@ -1,50 +1,47 @@
 <?php
- include("../config/config.php");
+  session_start();
+  include("../config/config.php");
+  include("../classes/Db.php");
+  include("../classes/Usuario.php");
 
- $cpf 	= $_REQUEST['cpf'];
- $senha = $_REQUEST['senha'];
- $email	= $_REQUEST['email'];
- $senha    = $senha . $parteForte;
- $senha = md5($senha);
+  $logado = false;
+  if( isset($_SESSION['logado']) ){
+    if($_SESSION['logado'] == true){
+        $logado = true;
+    }
+  }
+  if ($logado == false){
+      header("Location: ../index.php");
+  }
 
- $db = array();
+  $banco = new Db();
+  $banco->conectar();
+  $banco->setTabela("usuarios");
 
- $existe = false;
- if ( file_exists($arquivo)){
-     $dadosDb = file_get_contents($arquivo);
-     $db      = json_decode($dadosDb, true);
-     foreach ($db as $key => $pessoa) {
-     	if ( $pessoa["cpf"] == $cpf ){
-     		$existe = true;
-     	}
-     }
- }
+  $usuario = new Usuario();
 
- if($existe == true){
-     echo "
-       <center><h3>O CPF já existe cadastrado. <br><br>
-       <a href='../html/cadUsuario.html'>
-         Clique aqui para outro cadastro.
-       </a></h3></center>
-     ";
-     exit(0);
- }
+  $pagina = file_get_contents("../html/cadUsuario.html");
 
- $dados = array(
-    "cpf" 	=> $cpf,
-    "senha" => $senha,
-    "email" => $email
- );
+  if (!isset($_REQUEST['operacao'])){
+    $pagina = str_replace("#mensagem", "", $pagina);
+  }
 
- $db[] = $dados;
- $json = json_encode($db);
- $db = file_put_contents($arquivo, $json);
 
- echo "
-  <center><h3>Cadastro realizado com sucesso! <br><br>
-   <a href='../html/cadUsuario.html'>
-         Clique aqui para outro cadastro.
-   </a></h3></center>
-     ";
+  // no lugar de bsumit coloque o nome do seu botão
+  if (isset($_REQUEST['bsalvar'])){
+      $usuario->setCpf($_REQUEST['cpf']);
+      $usuario->setSenha(md5($_REQUEST['senha']));
+      $usuario->setEmail($_REQUEST['email']);
+      $usuario->gravar($banco);
+      $pagina = str_replace("#mensagem", 
+                          "Dados Salvos!", 
+                          $pagina);
+  }
 
+  $menu = file_get_contents("../html/menu.html");
+  $pagina = str_replace("#conteudo",
+                          $pagina,
+                          $menu);
+
+  echo $pagina;
 ?>

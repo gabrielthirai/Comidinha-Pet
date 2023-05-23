@@ -1,47 +1,44 @@
 <?php
+
 // tem que ser o primeiro comando do
 // programa - prepara o ambiente sessão
-  session_start();
+session_start();
 
-  include("../config/config.php");
+include("../config/config.php");
+include("../classes/Db.php");
+include("../classes/Usuario.php");
 
-  $cpf		= $_REQUEST['cpf'];
-  $senha	= $_REQUEST['senha'];
+$cpf		= $_REQUEST['cpf'];
+$senha	= $_REQUEST['senha'];
 
-  // abaixo junta senha com meu conteúdo forte
-  $senha    = $senha . $parteForte;
-  $senha    = md5($senha);
-  // echo $senha;
+// abaixo junta senha com meu conteúdo forte
+$senha    = $senha . $parteForte;
+$senha    = md5($senha);
+// echo $senha;
 
- $tudoOk = validar($cpf, $senha, $arquivo);
- if( $tudoOk == true)
- {
-    $_SESSION['logado']  = true;
-    $_SESSION['cpf']     = $cpf;
-    header("Location: menu.php");
- }
- else
- {
- 	  header("Location: ../index.php?mensagem=Erro, tente novamente!");
- }
+$banco = new Db();
+$banco -> conectar();
+$banco -> setTabela("usuarios"); 
 
- function validar($cpf, $senha, $arquivo)
- {
-   $resultado = false;
-   $db = array();
-   if ( file_exists($arquivo)){
-     $dadosDb =file_get_contents($arquivo);
-     $db = json_decode($dadosDb, true);
-     foreach ($db as $key => $pessoa) {
-        if ( ($pessoa["cpf"]   == $cpf) &&
-         ($pessoa["senha"] == $senha)){
-          $resultado = true;
-        }
-     }
-   }   
+$usuario = new Usuario();
+$campos = "senha";
+$where = "login '" . $cpf . "'";
+$registro = $usuario -> consultar(
+  $banco, $campos, $where
+);
 
-   return $resultado;  
- }
-
+$existe = 0;
+foreach($registro as $linha){
+  if($senha == $linha["senha"]){
+    $existe = 1;
+  } 
+}
+if($existe == 1){
+  $_SESSION['logado']  = true;
+  $_SESSION['cpf']     = $cpf;
+  header("Location: menu.php");
+}else{
+   header("Location: ../index.php?mensagem=Erro, tente novamente!");
+}
 
 ?>
