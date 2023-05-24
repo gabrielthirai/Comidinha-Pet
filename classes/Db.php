@@ -1,17 +1,5 @@
 <?php
 
-/**
- * classe Db
- *
- * Responsável por criar uma instancia de conexão com tabelas do banco de dados
- *
- * exemplo de uso inicial para ativar a classe
- * $db  = new Db();
- * $db->conectar();
- * $db->setTabela("usuarios"); 
- *
- * @author Sérgio Luiz Tonsig
- */
   class Db {
      private $host;
      private $porta;
@@ -21,33 +9,21 @@
      private $conexao;
      private $tabela;
 
-/**
- * Construtor responsável por definir os valores das propriedades da tabela
- * @method __construct
- * @param  string    $host        Ip do servidor do banco de dados
- * @param  string    $porta       Número da porta utilizada pelo banco 
- * @param  string    $usudb       Usuário do banco de dados
- * @param  string    $nomedb      Nome do banco de dados
- * @param  string    $senhadb     Senha do banco de dados
- */
-     function __construct($host="127.0.0.1",
+
+     function __construct($host="localhost",
                           $porta="3306",
                           $usudb="root",
-                          $nomedb="unisale",
+                          $nomedb="comidinhapet",
                           $senhadb=""){
      	$this->host     = $host;
      	$this->porta    = $porta;
-        $this->nomedb   = $nomedb;
+      $this->nomedb   = $nomedb;
      	$this->usudb    = $usudb;
      	$this->senhadb  = $senhadb;
 
      }
 
- /**
-  * Método responsável pela conexão com o banco de dados
-  * @method conectar
-  * @return id conexao
-  */	 
+	 
  public function conectar(){
  $dados = "mysql:host="       . $this->host;
  $dados = $dados . ";port="   . $this->porta;
@@ -64,26 +40,13 @@
    }
 }
 
-  /**
-   * Método responsável por definir a tabela
-   * @method setTabela
-   * @param  string    $tabela        Nome da tabela no banco de dados
-   */
   public function setTabela($tabela = null){
     $this->tabela = $tabela;
   }
 
-  /**
-   * Responsável por criar a SQL de seleção (SELECT)
-   * @method consultar
-   * @param  string $campos nome dos campos e alias a serem retornados
-   * @param  string $where  campos e valores do WHERE
-   * @param  string $order  campos e suas ordenações
-   * @param  string $limit  inicio,quantidade
-   * @return Mysqli Result Object
-   */
+
   public function consultar($campos = '*',$where = null,$order = null,$limit = null){
-    $campos = is_null($campos)?'*':$campos;
+    $campos = is_null($campos)?'':$campos;
 
     $where  = is_null($where)?'':'WHERE '.$where;
     $order  = is_null($order)?'':'ORDER BY '.$order;
@@ -94,23 +57,13 @@
 
   }
 
-  /**
-   * Método responsável por retornar o total de registros
-   * @method totalRegistros
-   * @param strings  $query Instruções SQL
-   * @return PDO Statement Object
-   */
+
   public function totalRegistros(){
       $sql = "SELECT count(*) as totalReg FROM " . $this->tabela;
       return $this->executaSQL($sql);
   }
   
-  /**
-   * Método responsável por executar as instruções SQLs
-   * @method executaSQL
-   * @param strings  $query Instruções SQL
-   * @return PDO Statement Object
-   */
+
   public function executaSQL($query){
 	$dados = array();
     $query = trim($query);
@@ -123,7 +76,7 @@
     		$this->conexao->rollBack();
 			$resultado = null;
 			$mensagem  = "db class executaSQL = " . $e->getMessage();
-//			file_put_contents("erro.log", $mensagem, FILE_APPEND);
+//file_put_contents("erro.log", $mensagem, FILE_APPEND);
     }
 	if ($resultado){
 	while($row=$resultado->fetch(PDO::FETCH_ASSOC))
@@ -135,12 +88,7 @@
 
   }
 
-/**
-   * Método responsável por criar a query de inserção (INSERT)
-   * @method insert
-   * @param  mixed  $dados Array ou Objeto (objeto deve possuir o método getAllAttributes do trait GetSet)
-   * @return boolean
-   */
+
   public function gravar($dados = null){
     $campos   = implode(",",array_keys($dados));
     $valores  = implode("','",array_values($dados));
@@ -150,13 +98,7 @@
     return $this->executaSQL($query);
   }  
 
- /**
-   * Método responsável por criar a query de atualização (UPDATE)
-   * @method update
-   * @param  string $where Instrução WHERE do Delete
-   * @param  mixed  $dados Array ou Objeto (objeto deve possuir o método getAllAttributes do trait GetSet)
-   * @return boolean
-   */
+
   public function alterar($where = null,$dados = null){
 
   if(!is_null($where)){
@@ -177,12 +119,6 @@
 
   }
   
-  /**
-   * Responsável por criar a query de exclusão (DELETE)
-   * @method delete
-   * @param  string $where Instrução WHERE do Delete
-   * @return boolean
-   */
   public function excluir($where = null){
     if(!is_null($where)){
       $query = "DELETE FROM ".$this->tabela." WHERE ".$where;

@@ -22,12 +22,6 @@
 
   $pagina = file_get_contents("../html/cadUsuario.html");
 
-  if (!isset($_REQUEST['operacao'])){
-    $pagina = str_replace("#mensagem", "", $pagina);
-  }
-
-
-  // no lugar de bsumit coloque o nome do seu botão
   if (isset($_REQUEST['bsalvar'])){
       $usuario->setCpf($_REQUEST['cpf']);
       $usuario->setSenha(md5($_REQUEST['senha']));

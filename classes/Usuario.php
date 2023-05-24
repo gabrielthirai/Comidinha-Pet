@@ -41,17 +41,14 @@
        {
          $dados=[];
          $dados["cpf"]     = $this->cpf;
-         $dados["nome"]    = $this->nome;
-         $dados["celular"] = $this->celular;
-         $dados["email"]   = $this->email;
-         $dados["login"]   = $this->login;
          $dados["senha"]   = $this->senha;
-         $retorno = $banco->gravar($dados);
+         $dados["email"]   = $this->email;
+        return $banco->gravar($dados);
 
        }
 
        public function consultar(Db $banco,
-                                 $campos="*",
+                                 $campos,
                                  $where)
        {
          $registros = $banco->consultar($campos, 

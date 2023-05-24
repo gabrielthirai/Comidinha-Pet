@@ -1,7 +1,4 @@
 <?php
-
-// tem que ser o primeiro comando do
-// programa - prepara o ambiente sessão
 session_start();
 
 include("../config/config.php");
@@ -22,8 +19,8 @@ $banco -> setTabela("usuarios");
 
 $usuario = new Usuario();
 $campos = "senha";
-$where = "login '" . $cpf . "'";
-$registro = $usuario -> consultar(
+$where = "cpf = '" . $cpf . "'";
+$registro = $usuario->consultar(
   $banco, $campos, $where
 );
 
@@ -34,8 +31,8 @@ foreach($registro as $linha){
   } 
 }
 if($existe == 1){
-  $_SESSION['logado']  = true;
   $_SESSION['cpf']     = $cpf;
+  $_SESSION['logado']  = true;
   header("Location: menu.php");
 }else{
    header("Location: ../index.php?mensagem=Erro, tente novamente!");
