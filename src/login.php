@@ -8,8 +8,6 @@ include("../classes/Usuario.php");
 $cpf		= $_REQUEST['cpf'];
 $senha	= $_REQUEST['senha'];
 
-// abaixo junta senha com meu conteúdo forte
-$senha    = $senha . $parteForte;
 $senha    = md5($senha);
 // echo $senha;
 
@@ -19,11 +17,10 @@ $banco -> setTabela("usuarios");
 
 $usuario = new Usuario();
 $campos = "senha";
-$where = "cpf = '" . $cpf . "'";
+$where ="cpf = '" . $cpf . "'";
 $registro = $usuario->consultar(
   $banco, $campos, $where
 );
-
 $existe = 0;
 foreach($registro as $linha){
   if($senha == $linha["senha"]){

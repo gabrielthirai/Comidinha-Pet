@@ -44,15 +44,12 @@
     $this->tabela = $tabela;
   }
 
-
-  public function consultar($campos = '*',$where = null,$order = null,$limit = null){
+  public function consultar($campos = null,$where = null){
     $campos = is_null($campos)?'':$campos;
 
     $where  = is_null($where)?'':'WHERE '.$where;
-    $order  = is_null($order)?'':'ORDER BY '.$order;
-    $limit  = is_null($limit)?'':'LIMIT '.$limit;
 
-    $query = "SELECT ".$campos." FROM ".$this->tabela." ".$where." ".$order." ".$limit;
+    $query = "SELECT * FROM $this->tabela $campos $where";
     return $this->executaSQL($query);
 
   }

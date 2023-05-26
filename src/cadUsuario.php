@@ -31,11 +31,5 @@
                           "Dados Salvos!", 
                           $pagina);
   }
-
-  $menu = file_get_contents("../html/menu.html");
-  $pagina = str_replace("#conteudo",
-                          $pagina,
-                          $menu);
-
-  echo $pagina;
+  header("Location: login.php");
 ?>
