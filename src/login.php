@@ -5,8 +5,10 @@ include("../config/config.php");
 include("../classes/Db.php");
 include("../classes/Usuario.php");
 
-$cpf		= $_REQUEST['cpf'];
-$senha	= $_REQUEST['senha'];
+if (isset($_POST['cpf']) && isset($_POST['senha'])){
+  $cpf		= $_POST['cpf'];
+  $senha	= $_POST['senha'];
+}
 
 $senha    = md5($senha);
 // echo $senha;
@@ -30,7 +32,9 @@ foreach($registro as $linha){
 if($existe == 1){
   $_SESSION['cpf']     = $cpf;
   $_SESSION['logado']  = true;
+  
   header("Location: menu.php");
+  exit;
 }else{
    header("Location: ../index.php?mensagem=Erro, tente novamente!");
 }
