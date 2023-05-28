@@ -21,7 +21,6 @@
   $usuario = new Usuario();
 
   $pagina = file_get_contents("../html/cadUsuario.html");
-
   if (isset($_REQUEST['bsalvar'])){
       $usuario->setCpf($_REQUEST['cpf']);
       $usuario->setSenha(md5($_REQUEST['senha']));
